@@ -26,16 +26,16 @@ class AISupport
         found.push(color)
       end
     end
-    # removes any hits from test 1
+    # removes any hits from test 1 so they do not get counted twice
     found.each { |value| code.slice!(code.index(value)) }
-    #second test catches hits for color but wrong position
+    #second test catches hits for color found in wrong position
     guess.each do |color|
       if code.include? color
         result[1] += 1
         code.slice! code.index(color)
       end
     end
-    @user_guesses << [guess,result]
+    @user_guesses << [guess, result]
     result
   end
 
@@ -75,7 +75,7 @@ class AISupport
   def display_results(result)
     @user_guesses.each_with_index do |guess,i|
       puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
-      puts "| Round #{i+1} |  #{guess[0][0]}  #{guess[0][1]}  #{guess[0][2]}  #{guess[0][3]} | #{result[1][0]} correct color and position | #{result[1][1]} correct color"
+      puts "| Round #{i+1} |  #{guess[0][0]}  #{guess[0][1]}  #{guess[0][2]}  #{guess[0][3]} | #{result[1][0]} correct color and position | #{result[1][1]} correct color only"
     end
     puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
   end
