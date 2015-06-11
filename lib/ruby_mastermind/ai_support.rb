@@ -36,7 +36,6 @@ class AISupport
       end
     end
     @user_guesses << [guess, result]
-    result
   end
 
   def validate_input(guess)
@@ -73,10 +72,11 @@ class AISupport
   end
 
   def display_results(result)
-    @user_guesses.each_with_index do |guess,i|
-      puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
-      puts "| Round #{i+1} |  #{guess[0][0]}  #{guess[0][1]}  #{guess[0][2]}  #{guess[0][3]} | #{result[1][0]} correct color and position | #{result[1][1]} correct color only"
+    puts @secret_code.inspect
+    puts "------------------------------------------- Mastermind -------------------------------------------".colorize(:color => :green, :background => :cyan)
+    result.each_with_index do |guess,i|
+      puts "| Round #{i+1} |  " + "%-31s" % "#{guess[0][0]}  #{guess[0][1]}  #{guess[0][2]}  #{guess[0][3]} " + "| #{guess[1][0]} correct color and position | #{guess[1][1]} correct color only"
     end
-    puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
+    puts "--------------------------------------------------------------------------------------------------".colorize(:color => :green, :background => :cyan)
   end
 end

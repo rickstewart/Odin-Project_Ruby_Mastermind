@@ -6,8 +6,7 @@ class Main
     valid = false
     ai = AISupport.new
     ai.welcome
-    secret_code = ai.generate_code
-    puts secret_code.inspect
+    ai.generate_code
     10.times do |round|
       round += 1
       until valid
