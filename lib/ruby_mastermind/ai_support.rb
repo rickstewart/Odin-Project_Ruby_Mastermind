@@ -3,6 +3,11 @@ class AISupport
   def initialize
     @COLORS = %w(red green blue yellow orange purple)
     @secret_code = Array.new
+    @user_guesses = Array.new
+  end
+
+  def user_guesses
+    @user_guesses
   end
 
   def generate_code
@@ -25,17 +30,18 @@ class AISupport
     found.each { |value| code.slice!(code.index(value)) }
     #second test catches hits for color but wrong position
     guess.each do |color|
-      if code.include? color.downcase
+      if code.include? color
         result[1] += 1
-        code.slice! code.index(color.downcase)
+        code.slice! code.index(color)
       end
     end
+    @user_guesses << [guess,result]
     result
   end
 
   def validate_input(guess)
     guess.each do |value|
-      if @COLORS.include? value.downcase
+      if @COLORS.include? value
       else
         return false
       end
@@ -45,23 +51,32 @@ class AISupport
   def get_user_guess(round)
     puts ""
     puts "This is round #{round}."
-    puts "For reference the colors are: red, green, blue, yellow, orange, and purple."
-    puts "Now, pick four colors, for example red green yellow red: "
-    gets.split(" ")
+    puts "The colors are: red, green, blue, yellow, orange, and purple."
+    puts "Pick four colors, for example, red green yellow red: "
+    guess = gets.split(" ")
+    guess.map(&:downcase)
   end
 
   def welcome
     puts ""
-    puts "==================================================================================================".bold.green.bg_gray
-    puts "| The game is Mastermind.                                                                        |".green.bg_gray
-    puts "| Your challenge is to guess four randomly generated colors.                                     |".green.bg_gray
-    puts "| The possible colors are: red, green, blue, yellow, orange, and purple.                         |".green.bg_gray
-    puts "| You will have ten rounds to deduce the four colors and their order.                            |".green.bg_gray
-    puts "| At the end of each round you will be told how many of your guesses picked                      |".green.bg_gray
-    puts "| the correct color along with the correct location, and how many correct                        |".green.bg_gray
-    puts "| colors but in the wrong location.                                                              |".green.bg_gray
-    puts "|                                                                                                |".green.bg_gray
-    puts "| Good Luck!                                                                                     |".green.bg_gray
-    puts "==================================================================================================".bold.green.bg_gray
+    puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
+    puts "| The game is Mastermind.                                                                        |".colorize(:color => :green, :background => :cyan)
+    puts "| Your challenge is to guess four randomly generated colors.                                     |".colorize(:color => :green, :background => :cyan)
+    puts "| The possible colors are: red, green, blue, yellow, orange, and purple.                         |".colorize(:color => :green, :background => :cyan)
+    puts "| You will have ten rounds to deduce the four colors and their order.                            |".colorize(:color => :green, :background => :cyan)
+    puts "| At the end of each round you will be told how many of your guesses picked                      |".colorize(:color => :green, :background => :cyan)
+    puts "| the correct color along with the correct location, and how many correct                        |".colorize(:color => :green, :background => :cyan)
+    puts "| colors but in the wrong location.                                                              |".colorize(:color => :green, :background => :cyan)
+    puts "|                                                                                                |".colorize(:color => :green, :background => :cyan)
+    puts "| Good Luck!                                                                                     |".colorize(:color => :green, :background => :cyan)
+    puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
+  end
+
+  def display_results(result)
+    @user_guesses.each_with_index do |guess,i|
+      puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
+      puts "| Round #{i+1} |  #{guess[0][0]}  #{guess[0][1]}  #{guess[0][2]}  #{guess[0][3]} | #{result[1][0]} correct color and position | #{result[1][1]} correct color"
+    end
+    puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
   end
 end

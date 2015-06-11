@@ -1,6 +1,5 @@
 class Main
   require_relative "ai_support"
-  require_relative "string"
   require "colorize"
 
   def go
@@ -16,12 +15,12 @@ class Main
         valid = ai.validate_input(guess)
         if valid
           result = ai.test_guess(guess)
-          puts "#{result[0]} hits for correct color and position"
-          puts "#{result[1]} hits for correct color but wrong position"
+          ai.display_results(result)
         else
           puts "oops... something was wrong with your guess, try again please."
         end
       end
+      valid = false
     end
   end
 end
