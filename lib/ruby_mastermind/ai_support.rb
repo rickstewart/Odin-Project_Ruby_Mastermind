@@ -80,11 +80,14 @@ class AISupport
   end
 
   def code_break_attempt(round)
+    ai_guess = []
     if round == 0
-      return %w(red red red red)
+      4.times {ai_guess << 'red'}
     else
-
+      wrong = 4 - (@user_guesses[1][0] + @user_guesses[1][1])
+      wrong.times {|i| ai_guess[i] << @COLORS[(round-1) % 5]}
     end
+    ai_guess
   end
 
   def win_lose_test(round)
