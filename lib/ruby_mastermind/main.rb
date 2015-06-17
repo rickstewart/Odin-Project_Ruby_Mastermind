@@ -1,55 +1,55 @@
 class Main
-  require_relative "ai_support"
+  require_relative "support"
   require "colorize"
 
   def go
     valid = false
-    ai = AISupport.new
-    ai.welcome
-    role = ai.pick_role
+    mm = Support.new
+    mm.welcome
+    role = mm.pick_role
     if role == "cb"
-      ai.generate_code
+      mm.ai_generate_code
       10.times do |round|
         round += 1
         until valid
-          guess = ai.get_user_guess(round)
-          valid = ai.validate_input(guess)
+          guess = mm.user_get_guess(round)
+          valid = mm.validate_input(guess)
           if valid
-            result = ai.test_guess(guess)
-            ai.display_results(result)
+            result = mm.test_guess(guess)
+            mm.display_results(result)
           else
-            ai.display_error
+            mm.display_error
           end
         end
         valid = false
-        end_game = ai.win_lose_test(round)
+        end_game = mm.win_lose_test(round)
         if end_game == "win"
-          ai.display_win
+          mm.display_win
           return
         elsif end_game == "lose"
-          ai.display_lost
+          mm.display_lost
           return
         end
       end
     else
       until valid
-        code = ai.pick_secret_code
-        valid = ai.validate_input(code)
+        code = mm.user_generate_code
+        valid = mm.validate_input(code)
         if !valid
-          ai.display_error2
+          mm.display_error2
         end
       end
       10.times do |round|
+        guess = mm.ai_code_break_attempt(round)
         round += 1
-        guess = ai.code_break_attempt(round)
-        result = ai.test_guess(guess)
-        ai.display_results(result)
-        end_game = ai.win_lose_test(round)
+        result = mm.test_guess(guess)
+        mm.display_results(result)
+        end_game = mm.win_lose_test(round)
         if end_game == "win"
-          ai.display_win
+          mm.display_win
           return
         elsif end_game == "lose"
-          ai.display_lost
+          mm.display_lost
           return
         end
       end

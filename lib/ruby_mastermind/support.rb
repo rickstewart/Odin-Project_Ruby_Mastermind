@@ -1,9 +1,10 @@
-class AISupport
+class Support
 
   def initialize
     @COLORS = %w(red green blue yellow orange purple)
     @secret_code = Array.new
     @user_guesses = Array.new
+    @ai_guess = Array.new
   end
 
   def pick_role
@@ -20,12 +21,12 @@ class AISupport
     end
   end
 
-  def generate_code
+  def ai_generate_code
     4.times { @secret_code.push(@COLORS.sample) }
     @secret_code
   end
 
-  def pick_secret_code
+  def user_generate_code
     puts ""
     puts "The colors are: red, green, blue, yellow, orange, and purple."
     puts "Pick four colors, for example, red green yellow red: "
@@ -33,7 +34,7 @@ class AISupport
     @secret_code.map(&:downcase)
   end
 
-  def get_user_guess(round)
+  def user_get_guess(round)
     puts ""
     puts "This is round #{round}."
     puts "The colors are: red, green, blue, yellow, orange, and purple."
@@ -42,7 +43,7 @@ class AISupport
     guess.map(&:downcase)
   end
 
-  def user_guesses_add(guess, result)
+  def add_guess_history(guess, result)
     @user_guesses << [guess, result]
   end
 
@@ -76,18 +77,17 @@ class AISupport
         code.slice! code.index(color)
       end
     end
-    user_guesses_add(guess, result)
+    add_guess_history(guess, result)
   end
 
-  def code_break_attempt(round)
-    ai_guess = []
+  def ai_code_break_attempt(round)
     if round == 0
-      4.times {ai_guess << 'red'}
+      4.times {@ai_guess << 'red'}
     else
-      wrong = 4 - (@user_guesses[1][0] + @user_guesses[1][1])
-      wrong.times {|i| ai_guess[i] << @COLORS[(round-1) % 5]}
+      wrong = 4 - (@user_guesses[round-1][1][0] + @user_guesses[round-1][1][1])
+      wrong.times {|i| @ai_guess[i] = @COLORS[(round) % 6]}
     end
-    ai_guess
+    @ai_guess
   end
 
   def win_lose_test(round)
