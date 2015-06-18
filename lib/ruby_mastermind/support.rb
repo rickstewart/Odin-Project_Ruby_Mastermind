@@ -87,7 +87,7 @@ class Support
       wrong = 4 - (@user_guesses[round-1][1][0] + @user_guesses[round-1][1][1])
       wrong.times {|i| @ai_guess[i] = @COLORS[(round) % 6]}
     else
-
+      @ai_guess.shuffle!
     end
     @ai_guess
   end
