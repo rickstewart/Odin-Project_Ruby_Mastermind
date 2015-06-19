@@ -49,13 +49,17 @@ class Support
   end
 
   def validate_input(guess)
-    guess.each do |value|
-      if (guess.count == 4) && (@COLORS.include? value)
-        return true
-      else
-        return false
+    if (guess.count == 4)
+      guess.each do |value|
+        if (@COLORS.include? value)
+        else
+          return false
+        end
       end
+    else
+      return false
     end
+    return true
   end
 
   def test_guess(guess)
@@ -83,10 +87,10 @@ class Support
 
   def ai_code_break_attempt(round)
     if round == 0
-      4.times {@ai_guess << 'red'}
+      4.times { @ai_guess << 'red' }
     elsif (@user_guesses[round-1][1][0] + @user_guesses[round-1][1][1]) < 4
       wrong = 4 - (@user_guesses[round-1][1][0] + @user_guesses[round-1][1][1])
-      wrong.times {|i| @ai_guess[i] = @COLORS[(round) % 6]}
+      wrong.times { |i| @ai_guess[i] = @COLORS[(round) % 6] }
     else
       @ai_guess.shuffle!
     end
