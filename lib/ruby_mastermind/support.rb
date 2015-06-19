@@ -45,6 +45,7 @@ class Support
 
   def add_guess_history(guess, result)
     @user_guesses << [guess, result]
+    @user_guesses
   end
 
   def validate_input(guess)
