@@ -26,7 +26,7 @@ class Support
     @secret_code
   end
 
-  def user_generate_code
+  def human_generate_code
     puts ""
     puts "The colors are: red, green, blue, yellow, orange, and purple."
     puts "Pick four colors, for example, red green yellow red: "
@@ -34,7 +34,7 @@ class Support
     @secret_code.map(&:downcase)
   end
 
-  def user_get_guess(round)
+  def get_human_guess(round)
     puts ""
     puts "This is round #{round}."
     puts "The colors are: red, green, blue, yellow, orange, and purple."
@@ -45,7 +45,6 @@ class Support
 
   def add_guess_history(guess, result)
     @user_guesses << [guess, result]
-    @user_guesses
   end
 
   def validate_input(guess)
