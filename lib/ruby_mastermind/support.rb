@@ -86,15 +86,17 @@ class Support
   end
 
   def ai_code_break_attempt(round)
+    round -= 1
+    guess = @ai_guess.clone
     if round == 0
-      4.times { @ai_guess << 'red' }
+      4.times { guess << 'red' }
     elsif (@user_guesses[round-1][1][0] + @user_guesses[round-1][1][1]) < 4
       wrong = 4 - (@user_guesses[round-1][1][0] + @user_guesses[round-1][1][1])
-      wrong.times { |i| @ai_guess[i] = @COLORS[(round) % 6] }
+      wrong.times { |i| guess[i] = @COLORS[(round) % 6] }
     else
-      @ai_guess.shuffle!
+      guess.shuffle!
     end
-    @ai_guess
+    @ai_guess = guess.clone
   end
 
   def win_lose_test(round)
@@ -144,10 +146,10 @@ class Support
   end
 
   def display_win
-    puts "------------------------------------ Congratulations! You Won! -------------------------------------".colorize(:color => :white, :background => :black)
+    puts "------------------------------------------- Human Wins! --------------------------------------------".colorize(:color => :white, :background => :black)
   end
 
   def display_lost
-    puts "------------------------------------- Sorry, Computer AI wins! -------------------------------------".colorize(:color => :white, :background => :black)
+    puts "---------------------------------------- Computer AI wins! -----------------------------------------".colorize(:color => :white, :background => :black)
   end
 end

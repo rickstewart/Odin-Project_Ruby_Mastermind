@@ -40,16 +40,16 @@ class Main
         end
       end
       10.times do |round|
-        guess = mm.ai_code_break_attempt(round)
         round += 1
+        guess = mm.ai_code_break_attempt(round)
         result = mm.test_guess(guess)
         mm.display_results(result)
         end_game = mm.win_lose_test(round)
         if end_game == "win"
-          mm.display_win
+          mm.display_lost
           return
         elsif end_game == "lose"
-          mm.display_lost
+          mm.display_win
           return
         end
       end
