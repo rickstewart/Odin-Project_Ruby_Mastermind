@@ -12,12 +12,13 @@ class AI
       round += 1
       guess = mm.ai_code_break_attempt(round)
       result = mm.test_guess(guess)
-      mm.display_results(result)
       end_game = mm.win_lose_test(round)
       if end_game == "win"
+        mm.display_results(result)
         mm.display_lost
         return
       elsif end_game == "lose"
+        mm.display_results(result)
         mm.display_win
         return
       end

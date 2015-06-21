@@ -109,46 +109,50 @@ class Support
 
   def welcome
     puts ""
-    puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
-    puts "| The game is Mastermind.                                                                        |".colorize(:color => :green, :background => :cyan)
-    puts "|                                                                                                |".colorize(:color => :green, :background => :cyan)
-    puts "| As 'CodeBreaker' your challenge is to guess four randomly generated colors.                    |".colorize(:color => :green, :background => :cyan)
-    puts "| The possible colors are: red, green, blue, yellow, orange, and purple.                         |".colorize(:color => :green, :background => :cyan)
-    puts "| You will have ten rounds to deduce the four colors and their order.                            |".colorize(:color => :green, :background => :cyan)
-    puts "| At the end of each round you will be told how many of your guesses picked                      |".colorize(:color => :green, :background => :cyan)
-    puts "| the correct color along with the correct location, and how many correct                        |".colorize(:color => :green, :background => :cyan)
-    puts "| colors but in the wrong location.                                                              |".colorize(:color => :green, :background => :cyan)
-    puts "|                                                                                                |".colorize(:color => :green, :background => :cyan)
-    puts "| As 'CodeMaker' your challenge is to generate a secret code consisting of any                   |".colorize(:color => :green, :background => :cyan)
-    puts "| combination of four colors picked from a palette of six. The computer AI will                  |".colorize(:color => :green, :background => :cyan)
-    puts "| then try to guess your secret code.                                                            |".colorize(:color => :green, :background => :cyan)
-    puts "|                                                                                                |".colorize(:color => :green, :background => :cyan)
-    puts "| Good Luck!                                                                                     |".colorize(:color => :green, :background => :cyan)
-    puts "==================================================================================================".colorize(:color => :green, :background => :cyan)
+    puts "==================================================================================================".colorize(:color => :black, :background => :yellow)
+    puts "| The game is Mastermind.                                                                        |".colorize(:color => :black, :background => :yellow)
+    puts "|                                                                                                |".colorize(:color => :black, :background => :yellow)
+    puts "| As 'CodeBreaker' your challenge is to guess four randomly generated colors.                    |".colorize(:color => :black, :background => :yellow)
+    puts "| The possible colors are: red, green, blue, yellow, orange, and purple.                         |".colorize(:color => :black, :background => :yellow)
+    puts "| You will have ten rounds to deduce the four colors and their order.                            |".colorize(:color => :black, :background => :yellow)
+    puts "| At the end of each round you will be told how many of your guesses picked                      |".colorize(:color => :black, :background => :yellow)
+    puts "| the correct color along with the correct location, and how many correct                        |".colorize(:color => :black, :background => :yellow)
+    puts "| colors but in the wrong location.                                                              |".colorize(:color => :black, :background => :yellow)
+    puts "|                                                                                                |".colorize(:color => :black, :background => :yellow)
+    puts "| As 'CodeMaker' your challenge is to generate a secret code consisting of any                   |".colorize(:color => :black, :background => :yellow)
+    puts "| combination of four colors picked from a palette of six. The computer AI will                  |".colorize(:color => :black, :background => :yellow)
+    puts "| then try to guess your secret code.                                                            |".colorize(:color => :black, :background => :yellow)
+    puts "|                                                                                                |".colorize(:color => :black, :background => :yellow)
+    puts "| Good Luck!                                                                                     |".colorize(:color => :black, :background => :yellow)
+    puts "==================================================================================================".colorize(:color => :black, :background => :yellow)
+    puts ""
   end
 
   def display_error
+    puts ""
     puts "oops... something was wrong with your guess, try again please."
   end
 
   def display_error2
+    puts ""
     puts "oops... something was wrong with your code, try again please."
   end
 
   def display_results(result)
-    puts "-------------------------------------------- Mastermind --------------------------------------------".colorize(:color => :green, :background => :cyan)
+    puts ""
+    puts "-------------------------------------------- MasterMind --------------------------------------------".colorize(:color => :black, :background => :cyan)
     result.each_with_index do |guess, i|
       puts "%-11s" % "| Round #{i+1} " + "|  " + "%-32s" % "#{guess[0][0]}  #{guess[0][1]}  #{guess[0][2]}  #{guess[0][3]} " + "| #{guess[1][0]} correct color and position | #{guess[1][1]} correct color only"
     end
-    puts "----------------------------------------------------------------------------------------------------".colorize(:color => :green, :background => :cyan)
+    puts "----------------------------------------------------------------------------------------------------".colorize(:color => :black, :background => :cyan)
     puts ""
   end
 
   def display_win
-    puts "------------------------------------------- Human Wins! --------------------------------------------".colorize(:color => :white, :background => :black)
+    puts "------------------------------------------- Human Wins! --------------------------------------------".colorize(:color => :black, :background => :yellow)
   end
 
   def display_lost
-    puts "---------------------------------------- Computer AI wins! -----------------------------------------".colorize(:color => :white, :background => :black)
+    puts "---------------------------------------- Computer AI wins! -----------------------------------------".colorize(:color => :black, :background => :yellow)
   end
 end
